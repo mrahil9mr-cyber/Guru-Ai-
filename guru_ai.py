@@ -65,7 +65,7 @@ def get_ai_response(prompt, mode):
         # Google Search Tool ko enable karna (Google Grounding Feature)
         model = genai.GenerativeModel(
             model_name='gemini-1.5-flash',
-            tools='google_search' 
+            tools=['google_search']
         )
         
         full_prompt = f"{context}\nUser Question: {prompt}\n\nGoogle Search ka use karke ekdum sacha aur up-to-date jawab dein."
