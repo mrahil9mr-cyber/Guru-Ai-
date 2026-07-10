@@ -1,6 +1,7 @@
 import streamlit as st
 import google.generativeai as genai
 from langchain_community.llms import Ollama
+from google.generativeai.types import Tool
 import sqlite3
 
 # --- DATABASE SETUP (Permanent Memory) ---
@@ -64,10 +65,13 @@ def get_ai_response(prompt, mode):
         
         # Google Search Tool ko enable karna (Google Grounding Feature)
         model = genai.GenerativeModel(
-            model_name='gemini-1.5-flash',
-            tools=['google_search']
+    model_name='gemini-1.5-flash',
+    tools=[
+        Tool(google_search_retrieval={}
         )
-        
+    ]
+)
+
         full_prompt = f"{context}\nUser Question: {prompt}\n\nGoogle Search ka use karke ekdum sacha aur up-to-date jawab dein."
         
         with st.spinner("Google par jankari dhoondh raha hoon... 🌐"):
